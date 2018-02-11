@@ -1,12 +1,11 @@
+require_relative 'words'
+
 class HangmanRules
 
   attr_reader :words, :available_letters
 
-  def initialize()
-  @words = ["jazzplayer", "yachtsman", "wristwatch", "microwave", "pneumonia",
-	   "megahertz", "buzzer", "happiness", "gazebo", "croquet", "zombie",
-	   "questionnaire", "fluorescent", "embarrassment", "restaurant",
-	   "hanukkah", "millennium", "xylophone", "hangman", "lasagna"]
+  def initialize(words)
+  @words = words.get_words()
   @available_letters = ("a".."z").to_a
   end
 
