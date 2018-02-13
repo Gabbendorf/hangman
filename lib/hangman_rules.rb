@@ -1,43 +1,34 @@
-require_relative 'words'
+require_relative 'word_generator'
 
 class HangmanRules
 
-  attr_reader :words, :available_letters, :right_guesses
+  attr_reader :words, :available_letters, :right_guesses, :secret_word
 
-  def initialize(words)
-  @words = words.get_words()
+  def initialize(word_generator)
+  @word_generator = word_generator
   @available_letters = ("a".."z").to_a
   @right_guesses = []
+  @secret_word = word_generator.random_word()
   end
 
-  def random_word()
-    words.sample()
-  end
-
-  def keep_track_of_guesses(secret_word, guessed_letter)
-    add_if_right_guess(secret_word, guessed_letter)
-    remove(guessed_letter)
-  end
-
-  def get_letters()
-    available_letters
+  def guess(letter)
+    if valid_guess?(letter)
+      add_right_guess(letter)
+    end
+    remove_from_possible_guesses(letter)
   end
 
   private
 
-  def add_if_right_guess(secret_word, guessed_letter)
-    if valid_guess?(secret_word, guessed_letter)
+  def add_right_guess(guessed_letter)
       right_guesses.push(guessed_letter)
-    end
   end
 
-  def valid_guess?(secret_word, guessed_letter)
+  def valid_guess?(guessed_letter)
     secret_word.include?(guessed_letter)
   end
 
-  def remove(letter_guessed)
-    available_letters.delete_if {
-      |letter| letter == letter_guessed
-    }
+  def remove_from_possible_guesses(letter_guessed)
+    available_letters.delete(letter_guessed)
   end
 end

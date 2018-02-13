@@ -1,61 +1,57 @@
 require 'spec_helper'
 require_relative '../lib/hangman_rules'
+require_relative '../lib/word_generator'
+require_relative 'word_generator_stub'
+require_relative '../lib/words'
 
 RSpec.describe HangmanRules do
 
+  let(:word_generator_stub) {WordGeneratorStub.new}
   let(:words) {Words.new}
+  let(:word_generator) {WordGenerator.new(words)}
 
   it "returns a random word" do
-    hangman_rules = new_hangman_rules(WordsStub.new)
+    hangman_rules = new_hangman_rules(word_generator_stub)
 
-    word = hangman_rules.random_word()
-
-    expect(word).to eq("hello")
+    expect(hangman_rules.secret_word).to eq("hello")
   end
 
-  it "stores letters correctly guessed" do
-    hangman_rules = new_hangman_rules(words)
+  it "remembers letters correctly guessed" do
+    hangman_rules = new_hangman_rules(word_generator_stub)
 
-    hangman_rules.keep_track_of_guesses("hello", "h")
-    hangman_rules.keep_track_of_guesses("hello", "e")
+    hangman_rules.guess("h")
+    hangman_rules.guess("e")
 
     expect(hangman_rules.right_guesses).to eq(["h", "e"])
   end
 
-  it "does not store letter not correctly guessed" do
-    hangman_rules = new_hangman_rules(words)
+  it "does ignore letters not correctly guessed" do
+    hangman_rules = new_hangman_rules(word_generator_stub)
 
-    hangman_rules.keep_track_of_guesses("hello", "c")
+    hangman_rules.guess("c")
 
     expect(hangman_rules.right_guesses).not_to include("c")
   end
 
   it "removes letter guessed from guessable letters" do
-    hangman_rules = new_hangman_rules(words)
+    hangman_rules = new_hangman_rules(word_generator_stub)
 
-    hangman_rules.keep_track_of_guesses("hello", "a")
+    hangman_rules.guess("a")
 
-    expect(hangman_rules.get_letters()).not_to include("a")
+    expect(hangman_rules.available_letters).not_to include("a")
   end
 
    it "returns all letters of alphabet" do
-    hangman_rules = new_hangman_rules(words)
+    hangman_rules = new_hangman_rules(word_generator)
 
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-    expect(hangman_rules.get_letters).to eq(alphabet)
+    expect(hangman_rules.available_letters).to eq(alphabet)
   end
 
   private
 
-  def new_hangman_rules(words)
-    HangmanRules.new(words)
+  def new_hangman_rules(word_generator)
+    HangmanRules.new(word_generator)
   end
 end
-
-  class WordsStub
-
-    def get_words()
-      ["hello"]
-    end
-  end

@@ -1,24 +1,34 @@
 require 'spec_helper'
 require_relative '../lib/word_formatter'
+require_relative 'word_generator_stub'
+require_relative '../lib/hangman_rules'
 
 RSpec.describe WordFormatter do
 
-  let(:words) {Words.new}
-  let(:rules) {HangmanRules.new(words)}
+  let(:word_generator_stub) {WordGeneratorStub.new}
+  let(:rules) {HangmanRules.new(word_generator_stub)}
   let(:formatter) {WordFormatter.new(rules)}
 
-  it "returns word showing all lines for no letters guessed" do
+  it "secret word is hidden at beginning of game" do
     formatted_word = formatter.format("hello")
 
     expect(formatted_word).to eq("_____")
   end
 
-  it "returns word showing lines and right guessed letters" do
-    rules.keep_track_of_guesses("hello", "h")
-    rules.keep_track_of_guesses("hello", "e")
+  it "reveals correctly guessed letters" do
+    rules.guess("h")
+    rules.guess("e")
 
     formatted_word = formatter.format("hello")
 
     expect(formatted_word).to eq("he___")
+  end
+
+  it "keeps hidden letters not correctly guessed" do
+    rules.guess("i")
+
+    formatted_word = formatter.format("hello")
+
+    expect(formatted_word).to eq("_____")
   end
 end

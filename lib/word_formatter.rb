@@ -19,11 +19,10 @@ class WordFormatter
 
   def replaced_letter(letter)
     if not_guessed?(letter)
-      letter = "_"
+      "_"
     else
-      letter = letter
+      letter
     end
-    letter
   end
 
   def not_guessed?(letter)
