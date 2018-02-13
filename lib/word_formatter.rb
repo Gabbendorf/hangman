@@ -9,15 +9,12 @@ class WordFormatter
   end
 
   def format(secret_word)
-    formatted_word = secret_word.split("").map do |letter|
-      letter = replaced_letter(letter)
-    end
-    formatted_word.join("")
+    secret_word.split("").map {|letter| hide_or_reveal(letter) }.join("")
   end
 
   private
 
-  def replaced_letter(letter)
+  def hide_or_reveal(letter)
     if not_guessed?(letter)
       "_"
     else
