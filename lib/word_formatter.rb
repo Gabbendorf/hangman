@@ -9,7 +9,7 @@ class WordFormatter
   end
 
   def format(secret_word)
-    secret_word.split("").map {|letter| hide_or_reveal(letter) }.join("")
+    secret_word.split("").map {|letter| hide_or_reveal(letter) }.join(" ")
   end
 
   private

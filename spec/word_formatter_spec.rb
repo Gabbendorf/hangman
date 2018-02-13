@@ -12,7 +12,7 @@ RSpec.describe WordFormatter do
   it "secret word is hidden at beginning of game" do
     formatted_word = formatter.format("hello")
 
-    expect(formatted_word).to eq("_____")
+    expect(formatted_word).to eq("_ _ _ _ _")
   end
 
   it "reveals correctly guessed letters" do
@@ -21,7 +21,7 @@ RSpec.describe WordFormatter do
 
     formatted_word = formatter.format("hello")
 
-    expect(formatted_word).to eq("he___")
+    expect(formatted_word).to eq("h e _ _ _")
   end
 
   it "keeps hidden letters not correctly guessed" do
@@ -29,6 +29,6 @@ RSpec.describe WordFormatter do
 
     formatted_word = formatter.format("hello")
 
-    expect(formatted_word).to eq("_____")
+    expect(formatted_word).to eq("_ _ _ _ _")
   end
 end
