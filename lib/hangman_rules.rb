@@ -21,7 +21,7 @@ class HangmanRules
   private
 
   def add_right_guess(guessed_letter)
-      right_guesses.push(guessed_letter)
+    right_guesses.push(guessed_letter)
   end
 
   def valid_guess?(guessed_letter)
