@@ -2,11 +2,11 @@ require_relative 'word_generator'
 
 class HangmanRules
 
-  attr_reader :words, :available_letters, :right_guesses, :secret_word
+  attr_reader :words, :guessable_letters, :right_guesses, :secret_word
 
   def initialize(word_generator)
   @word_generator = word_generator
-  @available_letters = ("a".."z").to_a
+  @guessable_letters = ("a".."z").to_a
   @right_guesses = []
   @secret_word = word_generator.random_word()
   end
@@ -29,6 +29,6 @@ class HangmanRules
   end
 
   def remove_from_possible_guesses(letter_guessed)
-    available_letters.delete(letter_guessed)
+    guessable_letters.delete(letter_guessed)
   end
 end

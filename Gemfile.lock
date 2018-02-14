@@ -25,11 +25,17 @@ GEM
       addressable (~> 2.3)
     multi_json (1.13.1)
     multipart-post (2.0.0)
+    mustermann (1.0.1)
     net-http-persistent (2.9.4)
     net-http-pipeline (1.0.1)
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
+    rack (2.0.4)
+    rack-protection (2.0.0)
+      rack
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rake (0.9.6)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
@@ -49,6 +55,12 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    sinatra (2.0.0)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0)
+      tilt (~> 2.0)
+    tilt (2.0.8)
     travis (1.8.8)
       backports
       faraday (~> 0.9)
@@ -66,9 +78,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  rack-test (~> 0.6.3)
   rake (= 0.9.6)
   rspec (= 3.5.0)
   simplecov
+  sinatra (= 2.0.0)
   travis (~> 1.8, >= 1.8.8)
 
 BUNDLED WITH

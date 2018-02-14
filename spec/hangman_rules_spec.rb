@@ -38,7 +38,7 @@ RSpec.describe HangmanRules do
 
     hangman_rules.guess("a")
 
-    expect(hangman_rules.available_letters).not_to include("a")
+    expect(hangman_rules.guessable_letters).not_to include("a")
   end
 
    it "returns all letters of alphabet" do
@@ -46,7 +46,7 @@ RSpec.describe HangmanRules do
 
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-    expect(hangman_rules.available_letters).to eq(alphabet)
+    expect(hangman_rules.guessable_letters).to eq(alphabet)
   end
 
   private
