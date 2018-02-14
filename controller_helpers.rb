@@ -2,7 +2,7 @@ module ControllerHelpers
 
   def letters
     if session[:letters].nil?
-      session[:letters] = rules.available_letters
+      session[:letters] = rules.guessable_letters
     end
     session[:letters]
   end
