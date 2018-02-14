@@ -12,13 +12,13 @@ class Controller < Sinatra::Base
   helpers ControllerHelpers
 
   get "/" do
-    @secret_word = word_formatter.format(secret_word)
+    @secret_word = word_formatter.format
     @letters = letters.join(" ")
     erb :home
   end
 
   post "/choose-letter" do
-    letters.delete(params['letter_chosen'])
+    guessed_letters << params["letter_chosen"]
     redirect "/"
   end
 

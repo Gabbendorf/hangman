@@ -11,4 +11,3 @@ gem 'travis', '~> 1.8', '>= 1.8.8'
 gem 'sinatra', '2.0.0'
 
 gem 'rack-test', '~> 0.6.3'
-
