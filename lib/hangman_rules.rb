@@ -18,14 +18,14 @@ class HangmanRules
     remove_from_possible_guesses(letter)
   end
 
+  def valid_guess?(guessed_letter)
+    secret_word.include?(guessed_letter)
+  end
+
   private
 
   def add_right_guess(guessed_letter)
     right_guesses.push(guessed_letter)
-  end
-
-  def valid_guess?(guessed_letter)
-    secret_word.include?(guessed_letter)
   end
 
   def remove_from_possible_guesses(letter_guessed)
