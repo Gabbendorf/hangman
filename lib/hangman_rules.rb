@@ -9,26 +9,48 @@ class HangmanRules
     @guesses = guesses
   end
 
-  def guess(letter, guessable_letters)
-    if valid_guess?(letter)
-      guesses[:right_guesses].push(letter)
-    else
-      guesses[:wrong_guesses].push(letter)
-    end
-    remove_from_possible_guesses(letter, guessable_letters)
+  def guess(guessed_letter, guessable_letters)
+    remember_guess_result(guessed_letter)
+    remove_from_possible_guesses(guessed_letter, guessable_letters)
   end
 
   def valid_guess?(guessed_letter)
     secret_word.include?(guessed_letter)
   end
 
+  def game_state
+    if word_guessed?
+      :won
+    elsif chances_to_win_run_out?
+      :lost
+    else
+      :ongoing
+    end
+  end
+
   private
 
-  def add_right_guess(guessed_letter)
-    right_guesses.push(guessed_letter)
+  def remember_guess_result(guessed_letter)
+    if valid_guess?(guessed_letter)
+      add_guess(guessed_letter, guesses[:right_guesses])
+    else
+      add_guess(guessed_letter, guesses[:wrong_guesses])
+    end
+  end
+
+  def add_guess(guessed_letter, guess_result)
+    guess_result.push(guessed_letter)
   end
 
   def remove_from_possible_guesses(letter_guessed, guessable_letters)
     guessable_letters.delete(letter_guessed)
+  end
+
+  def word_guessed?
+    guesses[:right_guesses].sort == secret_word.split("").uniq.sort
+  end
+
+  def chances_to_win_run_out?
+    guesses[:wrong_guesses].size == 11
   end
 end

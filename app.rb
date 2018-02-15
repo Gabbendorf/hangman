@@ -36,7 +36,7 @@ class App < Sinatra::Base
     end
 
     def images
-      ["hangman_0", "hangman_1", "hangman_2", "hangman_3", "hangman_4", "hangman_5", "hangman_6", "hangman_7", "hangman_8", "hangman_9", "hangman_10", "hangman_11", "game_over"]
+      ["hangman_0", "hangman_1", "hangman_2", "hangman_3", "hangman_4", "hangman_5", "hangman_6", "hangman_7", "hangman_8", "hangman_9", "hangman_10", "game_over"]
     end
 
     def current_image
@@ -55,10 +55,26 @@ class App < Sinatra::Base
     erb :home
   end
 
-  post "/choose-letter" do
+  post "/play" do
     rules = HangmanRules.new(secret_word, guesses)
     rules.guess(params['letter_chosen'], letters)
-    redirect "/"
+    if rules.game_state != :ongoing 
+      redirect "/end-of-game"
+    else
+      redirect "/"
+    end
+  end
+
+  get "/end-of-game" do
+    rules = HangmanRules.new(secret_word, guesses)
+    if rules.game_state == :won
+      @verdict = "You won!"
+      @image = images[0]
+    else
+      @verdict = "You lost!"
+      @image = images[11]
+    end
+    erb :game_over
   end
 
   run! if $PROGRAM_NAME == __FILE__
