@@ -4,7 +4,7 @@ require_relative '../lib/hangman_rules'
 
 RSpec.describe WordFormatter do
 
-  let(:rules) {HangmanRules.new("hello", [])}
+  let(:rules) {HangmanRules.new("hello", new_guesses)}
   let(:formatter) {WordFormatter.new(rules)}
 
   it "secret word is hidden at beginning of game" do
@@ -28,5 +28,11 @@ RSpec.describe WordFormatter do
     formatted_word = formatter.format("hello")
 
     expect(formatted_word).to eq("_ _ _ _ _")
+  end
+
+  private
+
+  def new_guesses
+    {:right_guesses => [], :wrong_guesses => []}
   end
 end

@@ -3,31 +3,27 @@ require_relative '../lib/hangman_rules'
 
 RSpec.describe HangmanRules do
 
-  #it "returns a random word" do
-    #hangman_rules = new_hangman_rules(word_generator_stub)
-
-    #expect(hangman_rules.secret_word).to eq("hello")
-  #end
-
   it "remembers letters correctly guessed" do
-    hangman_rules = new_hangman_rules("hello", [])
+    guesses = new_guesses
+    hangman_rules = new_hangman_rules("hello", guesses)
 
     hangman_rules.guess("h", guessable_letters)
     hangman_rules.guess("e", guessable_letters)
 
-    expect(hangman_rules.right_guesses).to eq(["h", "e"])
+    expect(guesses[:right_guesses]).to eq(["h", "e"])
   end
 
-  it "does ignore letters not correctly guessed" do
-    hangman_rules = new_hangman_rules("hello", [])
+  it "remembers letters not correctly guessed" do
+    guesses = new_guesses
+    hangman_rules = new_hangman_rules("hello", guesses)
 
     hangman_rules.guess("c", guessable_letters)
 
-    expect(hangman_rules.right_guesses).not_to include("c")
+    expect(guesses[:wrong_guesses]).to eq(["c"])
   end
 
   it "removes letter guessed from guessable letters" do
-    hangman_rules = new_hangman_rules("hello", [])
+    hangman_rules = new_hangman_rules("hello", new_guesses)
     letters = guessable_letters
 
     hangman_rules.guess("a", letters)
@@ -43,5 +39,9 @@ RSpec.describe HangmanRules do
 
   def guessable_letters
     ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+  end
+
+  def new_guesses
+    {:right_guesses => [], :wrong_guesses => []}
   end
 end

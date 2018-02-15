@@ -15,14 +15,14 @@ class WordFormatter
   private
 
   def hide_or_reveal(letter)
-    if not_guessed?(letter)
-      "_"
-    else
+    if correctly_guessed?(letter)
       letter
+    else
+      "_"
     end
   end
 
-  def not_guessed?(letter)
-    !rules.right_guesses.include?(letter)
+  def correctly_guessed?(letter)
+    rules.guesses[:right_guesses].include?(letter)
   end
 end

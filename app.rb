@@ -10,6 +10,10 @@ class App < Sinatra::Base
 
   helpers do
 
+    def rules
+      HangmanRules.new(secret_word, guesses)
+    end
+
     def letters
       if session[:letters].nil?
 	session[:letters] = ("a".."z").to_a
@@ -24,27 +28,35 @@ class App < Sinatra::Base
       session[:secret_word]
     end
 
-    def right_guesses()
-      if session[:right_guesses].nil?
-	session[:right_guesses] = []
+    def guesses
+      if session[:guesses].nil?
+	session[:guesses] = {:right_guesses => [], :wrong_guesses => []}
       end
-      session[:right_guesses]
+      session[:guesses]
     end
 
-    def rules
-      HangmanRules.new(secret_word, right_guesses)
+    def images
+      ["hangman_0", "hangman_1", "hangman_2", "hangman_3", "hangman_4", "hangman_5", "hangman_6", "hangman_7", "hangman_8", "hangman_9", "hangman_10", "hangman_11", "game_over"]
     end
 
+    def current_image
+      if !guesses[:wrong_guesses].empty?
+	images[guesses[:wrong_guesses].size]
+      else
+	images[0]
+      end
+    end
   end
 
   get "/" do
+    @image = current_image
     @secret_word = WordFormatter.new(rules).format(secret_word)
     @letters = letters.join(" ")
     erb :home
   end
 
   post "/choose-letter" do
-    rules = HangmanRules.new(secret_word, right_guesses)
+    rules = HangmanRules.new(secret_word, guesses)
     rules.guess(params['letter_chosen'], letters)
     redirect "/"
   end
