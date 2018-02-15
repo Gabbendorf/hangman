@@ -12,35 +12,40 @@ class App < Sinatra::Base
 
     def letters
       if session[:letters].nil?
-	session[:letters] = rules.guessable_letters
+	session[:letters] = ("a".."z").to_a
       end
       session[:letters]
     end
 
     def secret_word
       if session[:secret_word].nil?
-	session[:secret_word] = rules.secret_word
+	session[:secret_word] = WordGenerator.new(Words.new).random_word
       end
       session[:secret_word]
     end
 
-    def rules
-      HangmanRules.new(WordGenerator.new(Words.new))
+    def right_guesses()
+      if session[:right_guesses].nil?
+	session[:right_guesses] = []
+      end
+      session[:right_guesses]
     end
 
-    def word_formatter
-      WordFormatter.new(rules)
+    def rules
+      HangmanRules.new(secret_word, right_guesses)
     end
+
   end
 
   get "/" do
-    @secret_word = word_formatter.format(secret_word)
+    @secret_word = WordFormatter.new(rules).format(secret_word)
     @letters = letters.join(" ")
     erb :home
   end
 
   post "/choose-letter" do
-    letters.delete(params['letter_chosen'])
+    rules = HangmanRules.new(secret_word, right_guesses)
+    rules.guess(params['letter_chosen'], letters)
     redirect "/"
   end
 

@@ -9,6 +9,6 @@ class WordGenerator
   end
 
   def random_word()
-    words.get_words.sample()
+    words.secret_words.sample()
   end
 end
