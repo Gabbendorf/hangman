@@ -83,16 +83,7 @@ RSpec.describe HangmanRules do
   end
 
   def guess_wrong_eleven_times(hangman_rules)
-    hangman_rules.guess("e", guessable_letters)
-    hangman_rules.guess("f", guessable_letters)
-    hangman_rules.guess("a", guessable_letters)
-    hangman_rules.guess("b", guessable_letters)
-    hangman_rules.guess("c", guessable_letters)
-    hangman_rules.guess("d", guessable_letters)
-    hangman_rules.guess("g", guessable_letters)
-    hangman_rules.guess("z", guessable_letters)
-    hangman_rules.guess("q", guessable_letters)
-    hangman_rules.guess("w", guessable_letters)
-    hangman_rules.guess("p", guessable_letters)
+    wrong_guesses = ["e", "f", "a", "b", "c", "d", "g", "z", "q", "w", "p"]
+    wrong_guesses.each {|wrong_guess| hangman_rules.guess(wrong_guess, guessable_letters)}
   end
 end
