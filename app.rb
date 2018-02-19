@@ -3,6 +3,7 @@ require_relative 'lib/hangman_rules'
 require_relative 'lib/word_generator'
 require_relative 'lib/words'
 require_relative 'lib/word_formatter'
+require_relative 'lib/image_setter'
 
 class App < Sinatra::Base
 
@@ -34,22 +35,10 @@ class App < Sinatra::Base
       end
       session[:guesses]
     end
-
-    def images
-      ["hangman_0", "hangman_1", "hangman_2", "hangman_3", "hangman_4", "hangman_5", "hangman_6", "hangman_7", "hangman_8", "hangman_9", "hangman_10", "game_over"]
-    end
-
-    def current_image
-      if !guesses[:wrong_guesses].empty?
-	images[guesses[:wrong_guesses].size]
-      else
-	images[0]
-      end
-    end
   end
 
   get "/" do
-    @image = current_image
+    @image = ImageSetter.new.current_image(guesses[:wrong_guesses])
     @secret_word = WordFormatter.new(rules).format(secret_word)
     @letters = letters.join(" ")
     erb :home
@@ -58,7 +47,7 @@ class App < Sinatra::Base
   post "/play" do
     rules = HangmanRules.new(secret_word, guesses)
     rules.guess(params['letter_chosen'], letters)
-    if rules.game_state != :ongoing 
+    if rules.game_state != :ongoing
       redirect "/end-of-game"
     else
       redirect "/"
@@ -69,14 +58,13 @@ class App < Sinatra::Base
     rules = HangmanRules.new(secret_word, guesses)
     if rules.game_state == :won
       @verdict = "You won!"
-      @image = images[0]
+      @image = ImageSetter.new.image_for_winner
     else
       @verdict = "You lost!"
-      @image = images[11]
+      @image = ImageSetter.new.image_for_loser
     end
     erb :game_over
   end
 
   run! if $PROGRAM_NAME == __FILE__
 end
-
