@@ -57,6 +57,7 @@ class App < Sinatra::Base
 
   get "/end-of-game" do
     rules = HangmanRules.new(secret_word, guesses)
+    @secret_word_revealed = secret_word.upcase
     if Game.new(rules).state == :won
       @verdict = "You won!"
       @image = ImageSetter.new.image_for_winner
