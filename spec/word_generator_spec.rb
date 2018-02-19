@@ -8,6 +8,4 @@ RSpec.describe WordGenerator do
 
     expect(word_generator.random_word).to eq("hello")
   end
-
-
 end
