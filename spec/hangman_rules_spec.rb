@@ -31,43 +31,6 @@ RSpec.describe HangmanRules do
     expect(letters).not_to include("a")
   end
 
-  it "knows when game is over and player won" do
-    guesses = new_guesses
-    hangman_rules = new_hangman_rules("hi", guesses)
-
-    hangman_rules.guess("h", guessable_letters)
-    hangman_rules.guess("i", guessable_letters)
-
-    expect(hangman_rules.game_state).to eq(:won)
-  end
-
-  it "does not consider doubles in secret word when checking if won" do
-    guesses = new_guesses
-    hangman_rules = new_hangman_rules("hh", guesses)
-
-    hangman_rules.guess("h", guessable_letters)
-
-    expect(hangman_rules.game_state).to eq(:won)
-  end
-
-  it "knows player lost if they guess 11 times wrongly" do
-    guesses = new_guesses
-    hangman_rules = new_hangman_rules("hi", guesses)
-
-    guess_wrong_eleven_times(hangman_rules)
-
-    expect(hangman_rules.game_state).to eq(:lost)
-  end
-
-  it "knows if game is not over" do
-    guesses = new_guesses
-    hangman_rules = new_hangman_rules("hi", guesses)
-
-    hangman_rules.guess("h", guessable_letters)
-
-    expect(hangman_rules.game_state).to eq(:ongoing)
-  end
-
   private
 
   def new_hangman_rules(word, right_guesses)
@@ -80,10 +43,5 @@ RSpec.describe HangmanRules do
 
   def new_guesses
     {:right_guesses => [], :wrong_guesses => []}
-  end
-
-  def guess_wrong_eleven_times(hangman_rules)
-    wrong_guesses = ["e", "f", "a", "b", "c", "d", "g", "z", "q", "w", "p"]
-    wrong_guesses.each {|wrong_guess| hangman_rules.guess(wrong_guess, guessable_letters)}
   end
 end

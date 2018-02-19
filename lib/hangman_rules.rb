@@ -18,16 +18,6 @@ class HangmanRules
     secret_word.include?(guessed_letter)
   end
 
-  def game_state
-    if word_guessed?
-      :won
-    elsif chances_to_win_run_out?
-      :lost
-    else
-      :ongoing
-    end
-  end
-
   private
 
   def remember_guess_result(guessed_letter)
@@ -44,13 +34,5 @@ class HangmanRules
 
   def remove_from_possible_guesses(letter_guessed, guessable_letters)
     guessable_letters.delete(letter_guessed)
-  end
-
-  def word_guessed?
-    guesses[:right_guesses].sort == secret_word.split("").uniq.sort
-  end
-
-  def chances_to_win_run_out?
-    guesses[:wrong_guesses].size == 11
   end
 end

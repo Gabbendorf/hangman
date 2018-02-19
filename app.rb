@@ -4,6 +4,7 @@ require_relative 'lib/word_generator'
 require_relative 'lib/words'
 require_relative 'lib/word_formatter'
 require_relative 'lib/image_setter'
+require_relative 'lib/game'
 
 class App < Sinatra::Base
 
@@ -47,7 +48,7 @@ class App < Sinatra::Base
   post "/play" do
     rules = HangmanRules.new(secret_word, guesses)
     rules.guess(params['letter_chosen'], letters)
-    if rules.game_state != :ongoing
+    if Game.new(rules).finished?
       redirect "/end-of-game"
     else
       redirect "/"
@@ -56,7 +57,7 @@ class App < Sinatra::Base
 
   get "/end-of-game" do
     rules = HangmanRules.new(secret_word, guesses)
-    if rules.game_state == :won
+    if Game.new(rules).state == :won
       @verdict = "You won!"
       @image = ImageSetter.new.image_for_winner
     else
