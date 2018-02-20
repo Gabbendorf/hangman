@@ -16,13 +16,6 @@ class App < Sinatra::Base
       HangmanRules.new(secret_word, guesses)
     end
 
-    def letters
-      if session[:letters].nil?
-	session[:letters] = ("a".."z").to_a
-      end
-      session[:letters]
-    end
-
     def secret_word
       if session[:secret_word].nil?
 	session[:secret_word] = WordGenerator.new(Words.new).random_word
@@ -35,6 +28,30 @@ class App < Sinatra::Base
 	session[:guesses] = {:right_guesses => [], :wrong_guesses => []}
       end
       session[:guesses]
+    end
+
+    def letters
+      if session[:letters].nil?
+	session[:letters] = ("a".."z").to_a
+      end
+      session[:letters]
+    end
+
+    def games_won
+      if session[:games_won].nil?
+	session[:games_won] = 0
+      end
+      session[:games_won]
+    end
+
+    def update_won_games_count
+      games_won
+      session[:games_won] += 1
+    end
+
+    def display(verdict_message, image)
+      @verdict = verdict_message
+      @image = image
     end
   end
 
@@ -59,13 +76,25 @@ class App < Sinatra::Base
     rules = HangmanRules.new(secret_word, guesses)
     @secret_word_revealed = secret_word.upcase
     if Game.new(rules).state == :won
-      @verdict = "You won!"
-      @image = ImageSetter.new.image_for_winner
+      update_won_games_count
+      display("You won!", ImageSetter.new.image_for_winner)
     else
-      @verdict = "You lost!"
-      @image = ImageSetter.new.image_for_loser
+      display("You lost!", ImageSetter.new.image_for_loser)
     end
     erb :game_over
+  end
+
+  get "/games-won" do
+    @won_games_count = games_won.to_s
+    rules = HangmanRules.new(secret_word, guesses)
+    if Game.new(rules).finished?
+      @page_to_go_back_to = "end-of-game"
+      @message = "Would you like to play again?"
+    else
+      @page_to_go_back_to = "/"
+      @message = "Go back"
+    end
+    erb :games_won
   end
 
   run! if $PROGRAM_NAME == __FILE__

@@ -40,6 +40,7 @@ RSpec.describe App do
 
   it "displays the heart image corresponding to start of game on homepage" do
     starting_image = "heart"
+
     get '/'
 
     expect(last_response.body).to include(starting_image)
@@ -48,6 +49,7 @@ RSpec.describe App do
   it "deletes guessed letter from guessable letters in play route" do
     get '/'
     post '/play', 'letter_chosen' => 'a'
+
     follow_redirect!
 
     expect(last_response.body).to include("b c d e f g h i j k l m n o p q r s t u v w x y z")
@@ -55,6 +57,7 @@ RSpec.describe App do
 
   it "displays updated hangman immage if guess is wrong" do
     updated_image_for_wrong_guess = "hangman_1"
+
     play("hi", ["g"])
     follow_redirect!
 
@@ -98,6 +101,18 @@ RSpec.describe App do
     follow_redirect!
 
     expect(last_response.body).to include(dead_man_image)
+  end
+
+  it "says 0 games won in /games-won route for no games won yet" do
+    get '/games-won'
+
+    expect(last_response.body).to include("You won 0 times")
+  end
+
+  it "updates games won message in /games-won route" do
+    get '/games-won', {}, {'rack.session' => {'games_won' => 5}}
+
+    expect(last_response.body).to include("You won 5 times")
   end
 
   private
