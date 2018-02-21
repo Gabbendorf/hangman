@@ -55,7 +55,7 @@ RSpec.describe App do
     expect(last_response.body).to include("b c d e f g h i j k l m n o p q r s t u v w x y z")
   end
 
-  it "displays updated hangman immage if guess is wrong" do
+  it "displays updated hangman image if guess is wrong" do
     updated_image_for_wrong_guess = "hangman_1"
 
     play("hi", ["g"])
@@ -71,7 +71,7 @@ RSpec.describe App do
     expect(last_response.body).to include("You won!")
   end
 
-  it "displays heart immage if game is over and player won" do
+  it "displays heart image if game is over and player won" do
     winning_image = "heart"
 
     play("hi", ["h", "i"])
@@ -94,7 +94,7 @@ RSpec.describe App do
     expect(last_response.body).to include("You lost!")
   end
 
-  it "displays dead man immage if game is over and player lost" do
+  it "displays dead man image if game is over and player lost" do
     dead_man_image = "game_over"
 
     play("hi", eleven_wrong_letters)
@@ -113,6 +113,13 @@ RSpec.describe App do
     get '/games-won', {}, {'rack.session' => {'games_won' => 5}}
 
     expect(last_response.body).to include("You won 5 times")
+  end
+
+  it "updates session cookie for won games count" do
+    get '/'
+    play("hi", ["h", "i"])
+
+    expect(App.games_won).to eq(1)
   end
 
   private
