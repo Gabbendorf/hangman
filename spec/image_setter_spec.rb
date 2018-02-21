@@ -5,9 +5,9 @@ RSpec.describe ImageSetter do
 
   let(:image_setter) {ImageSetter.new}
 
-  it "returns first image for no wrong guesses yet" do
+  it "returns heart image for no wrong guesses yet" do
     wrong_guesses = []
-    first_image = "hangman_0"
+    first_image = "heart"
 
     expect(image_setter.current_image(wrong_guesses)).to eq(first_image)
   end
@@ -19,8 +19,8 @@ RSpec.describe ImageSetter do
     expect(image_setter.current_image(wrong_guesses)).to eq(current_image)
   end
 
-  it "returns first image for winning player" do
-    winner_image = "hangman_0"
+  it "returns heart image for winning player" do
+    winner_image = "heart"
 
     expect(image_setter.image_for_winner).to eq(winner_image)
   end

@@ -4,6 +4,7 @@ require_relative 'lib/word_generator'
 require_relative 'lib/words'
 require_relative 'lib/word_formatter'
 require_relative 'lib/image_setter'
+require_relative 'lib/game'
 
 class App < Sinatra::Base
 
@@ -13,13 +14,6 @@ class App < Sinatra::Base
 
     def rules
       HangmanRules.new(secret_word, guesses)
-    end
-
-    def letters
-      if session[:letters].nil?
-	session[:letters] = ("a".."z").to_a
-      end
-      session[:letters]
     end
 
     def secret_word
@@ -35,6 +29,30 @@ class App < Sinatra::Base
       end
       session[:guesses]
     end
+
+    def letters
+      if session[:letters].nil?
+	session[:letters] = ("a".."z").to_a
+      end
+      session[:letters]
+    end
+
+    def games_won
+      if session[:games_won].nil?
+	session[:games_won] = 0
+      end
+      session[:games_won]
+    end
+
+    def update_won_games_count
+      games_won
+      session[:games_won] += 1
+    end
+
+    def display(verdict_message, image)
+      @verdict = verdict_message
+      @image = image
+    end
   end
 
   get "/" do
@@ -47,7 +65,7 @@ class App < Sinatra::Base
   post "/play" do
     rules = HangmanRules.new(secret_word, guesses)
     rules.guess(params['letter_chosen'], letters)
-    if rules.game_state != :ongoing
+    if Game.new(rules).finished?
       redirect "/end-of-game"
     else
       redirect "/"
@@ -56,14 +74,27 @@ class App < Sinatra::Base
 
   get "/end-of-game" do
     rules = HangmanRules.new(secret_word, guesses)
-    if rules.game_state == :won
-      @verdict = "You won!"
-      @image = ImageSetter.new.image_for_winner
+    @secret_word_revealed = secret_word.upcase
+    if Game.new(rules).state == :won
+      update_won_games_count
+      display("You won!", ImageSetter.new.image_for_winner)
     else
-      @verdict = "You lost!"
-      @image = ImageSetter.new.image_for_loser
+      display("You lost!", ImageSetter.new.image_for_loser)
     end
     erb :game_over
+  end
+
+  get "/games-won" do
+    @won_games_count = games_won.to_s
+    rules = HangmanRules.new(secret_word, guesses)
+    if Game.new(rules).finished?
+      @page_to_go_back_to = "end-of-game"
+      @message = "Would you like to play again?"
+    else
+      @page_to_go_back_to = "/"
+      @message = "Go back"
+    end
+    erb :games_won
   end
 
   run! if $PROGRAM_NAME == __FILE__

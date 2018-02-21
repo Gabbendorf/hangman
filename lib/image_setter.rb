@@ -3,7 +3,7 @@ class ImageSetter
   attr_reader :images
 
   def initialize
-    @images = ["hangman_0", "hangman_1", "hangman_2", "hangman_3", "hangman_4", "hangman_5", "hangman_6", "hangman_7", "hangman_8", "hangman_9", "hangman_10", "game_over"]
+    @images = ["heart", "hangman_1", "hangman_2", "hangman_3", "hangman_4", "hangman_5", "hangman_6", "hangman_7", "hangman_8", "hangman_9", "hangman_10", "game_over"]
   end
 
   def current_image(wrong_guesses)
