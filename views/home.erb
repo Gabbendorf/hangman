@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Hangman</title>
+  </head>
+  <body class='container'>
+    <h1> WELCOME TO HANGMAN GAME</h1>
+    <img src='<%= @image %>.jpg' alt='hangman image' height="500" width="500">
+    <p><%= @secret_word %></p>
+    <form action='/play' method='post'>
+      <label for='letter'>Make a guess:</label>
+      <input type='text' id='letter' name='letter_chosen'>
+      <button type='submit' class='btn btn-primary'>submit</button>
+    </form>
+    <p><%= @letters %></p>
+    <p><%= @show_word %></p>
+    <a href='/games-won'>How many times did I win?</a>
+  </body>
+</html>
+
