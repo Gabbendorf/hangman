@@ -1,4 +1,4 @@
-class ImageSetter
+class ImageLibrary
 
   attr_reader :images
 

@@ -3,7 +3,7 @@ require_relative 'lib/hangman_rules'
 require_relative 'lib/word_generator'
 require_relative 'lib/words'
 require_relative 'lib/word_formatter'
-require_relative 'lib/image_setter'
+require_relative 'lib/image_library'
 require_relative 'lib/game'
 
 class App < Sinatra::Base
@@ -56,7 +56,7 @@ class App < Sinatra::Base
   end
 
   get "/" do
-    @image = ImageSetter.new.current_image(guesses[:wrong_guesses])
+    @image = ImageLibrary.new.current_image(guesses[:wrong_guesses])
     @secret_word = WordFormatter.new(rules).format(secret_word)
     @letters = letters.join(" ")
     erb :home
@@ -77,9 +77,9 @@ class App < Sinatra::Base
     @secret_word_revealed = secret_word.upcase
     if Game.new(rules).state == :won
       update_won_games_count
-      display("You won!", ImageSetter.new.image_for_winner)
+      display("You won!", ImageLibrary.new.image_for_winner)
     else
-      display("You lost!", ImageSetter.new.image_for_loser)
+      display("You lost!", ImageLibrary.new.image_for_loser)
     end
     erb :game_over
   end
