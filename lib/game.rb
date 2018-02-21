@@ -25,7 +25,7 @@ class Game
   private
 
   def word_guessed?
-    rules.guesses[:right_guesses].uniq.sort == rules.secret_word.split("").uniq.sort
+    rules.guesses[:right_guesses].sort == rules.secret_word.split("").uniq.sort
   end
 
   def chances_to_win_run_out?
