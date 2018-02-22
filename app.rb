@@ -53,6 +53,12 @@ class App < Sinatra::Base
       @verdict = verdict_message
       @image = image
     end
+
+    def reset_game
+      session[:secret_word] = nil
+      session[:guesses] = nil
+      session[:letters] = nil
+    end
   end
 
   get "/" do
@@ -84,15 +90,18 @@ class App < Sinatra::Base
     erb :game_over
   end
 
+  post "/play-again" do
+    reset_game
+    redirect '/'
+  end
+
   get "/games-won" do
     @won_games_count = games_won.to_s
     rules = HangmanRules.new(secret_word, guesses)
     if Game.new(rules).finished?
       @page_to_go_back_to = "end-of-game"
-      @message = "Would you like to play again?"
     else
       @page_to_go_back_to = "/"
-      @message = "Go back"
     end
     erb :games_won
   end

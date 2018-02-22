@@ -115,6 +115,36 @@ RSpec.describe App do
     expect(last_response.body).to include("You won 5 times")
   end
 
+  it "updates count of won games in session cookie" do
+    get '/end-of-game', {}, {'rack.session' => {'secret_word' => "hi", 'guesses' => {:right_guesses => ["h", "i"], :wrong_guesses => []}}}
+
+    expect(last_request.env['rack.session']['games_won']).to eq(1)
+  end
+
+  it "resets word session to nil for new game in /play-again route" do
+    play("hi", ["h", "i"])
+
+    post 'play-again'
+
+    expect(last_request.env['rack.session']['secret_word']).to eq(nil)
+  end
+
+  it "resets guesses session to nil for new game in /play-again route" do
+    play("hi", ["h", "i"])
+
+    post 'play-again'
+
+    expect(last_request.env['rack.session']['guesses']).to eq(nil)
+  end
+
+  it "resets letters session to nil for new game in /play-again route" do
+    play("hi", ["h", "i"])
+
+    post 'play-again'
+
+    expect(last_request.env['rack.session']['letters']).to eq(nil)
+  end
+
   private
 
   def eleven_wrong_letters
