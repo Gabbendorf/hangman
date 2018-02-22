@@ -49,6 +49,12 @@ class App < Sinatra::Base
       session[:games_won] += 1
     end
 
+    def keep_same_win_counts(game)
+      if game.state == :won
+	session[:games_won] -= 1
+      end
+    end
+
     def display(verdict_message, image)
       @verdict = verdict_message
       @image = image
@@ -79,8 +85,8 @@ class App < Sinatra::Base
   end
 
   get "/end-of-game" do
-    rules = HangmanRules.new(secret_word, guesses)
     @secret_word_revealed = secret_word.upcase
+    rules = HangmanRules.new(secret_word, guesses)
     if Game.new(rules).state == :won
       update_won_games_count
       display("You won!", ImageLibrary.new.image_for_winner)
@@ -100,6 +106,7 @@ class App < Sinatra::Base
     rules = HangmanRules.new(secret_word, guesses)
     if Game.new(rules).finished?
       @page_to_go_back_to = "end-of-game"
+      keep_same_win_counts(Game.new(rules))
     else
       @page_to_go_back_to = "/"
     end
