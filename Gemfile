@@ -7,8 +7,5 @@ group :test do
 end
 
 gem 'travis', '~> 1.8', '>= 1.8.8'
-
 gem 'sinatra', '~> 2.0.1'
-
 gem 'rack-test', '~> 0.6.3'
-
