@@ -76,7 +76,7 @@ class App < Sinatra::Base
 
   post "/play" do
     rules = HangmanRules.new(secret_word, guesses)
-    rules.guess(params['letter_chosen'], letters)
+    rules.guess(params['letter_chosen'].downcase, letters)
     if Game.new(rules).finished?
       redirect "/end-of-game"
     else
