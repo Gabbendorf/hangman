@@ -26,8 +26,8 @@ RSpec.describe App do
     expect(last_response.body).to include("_ _")
   end
 
-  it "displays the heart image corresponding to start of game on homepage" do
-    starting_image = "heart"
+  it "displays the start image corresponding to start of game on homepage" do
+    starting_image = "start"
 
     get '/'
 

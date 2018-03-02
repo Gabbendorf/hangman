@@ -5,9 +5,9 @@ RSpec.describe ImageLibrary do
 
   let(:image_library) {ImageLibrary.new}
 
-  it "returns heart image for no wrong guesses yet" do
+  it "returns start image for no wrong guesses yet" do
     wrong_guesses = []
-    first_image = "heart"
+    first_image = "start"
 
     expect(image_library.current_image(wrong_guesses)).to eq(first_image)
   end
@@ -25,7 +25,7 @@ RSpec.describe ImageLibrary do
     expect(image_library.image_for_winner).to eq(winner_image)
   end
 
-  it "returns last image for loser player" do
+  it "returns game_over image for loser player" do
     losing_image = "game_over"
 
     expect(image_library.image_for_loser).to eq(losing_image)
