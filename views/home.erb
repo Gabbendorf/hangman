@@ -10,7 +10,7 @@
     <p><%= @secret_word %></p>
     <form action='/play' method='post'>
       <label for='letter'>Make a guess:</label>
-      <input type='text' id='letter' name='letter_chosen'>
+      <input type='text' id='letter' name='letter_chosen' autofocus="autofocus">
       <button type='submit' class='btn btn-primary'>submit</button>
     </form>
     <p><%= @letters %></p>
