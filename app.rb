@@ -30,13 +30,6 @@ class App < Sinatra::Base
       session[:guesses]
     end
 
-    def letters
-      if session[:letters].nil?
-	session[:letters] = ("a".."z").to_a
-      end
-      session[:letters]
-    end
-
     def games_won
       if session[:games_won].nil?
 	session[:games_won] = 0
@@ -65,18 +58,22 @@ class App < Sinatra::Base
       session[:guesses] = nil
       session[:letters] = nil
     end
+
+    def format(wrong_guesses)
+      wrong_guesses.map {|guess| guess.capitalize}.join(" ")
+    end
   end
 
   get "/" do
     @image = ImageLibrary.new.current_image(guesses[:wrong_guesses])
     @secret_word = WordFormatter.new(rules).format(secret_word)
-    @letters = letters.join(" ")
+    @wrong_guesses = format(guesses[:wrong_guesses])
     erb :home
   end
 
   post "/play" do
     rules = HangmanRules.new(secret_word, guesses)
-    rules.guess(params['letter_chosen'].downcase, letters)
+    rules.guess(params['letter_chosen'].downcase)
     if Game.new(rules).finished?
       redirect "/end-of-game"
     else

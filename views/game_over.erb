@@ -5,13 +5,13 @@
     <title>Hangman</title>
   </head>
   <body class='container'>
+    <a href='/games-won'>Win Counter</a>
     <img src='<%= @image %>.jpg' height="500" width="500">
     <p><%= @secret_word_revealed %></p>
     <p><%= @verdict %></p>
     <form action='/play-again' method='post'>
       <button type='re-play'>Play again</button>
     </form>
-    <a href='/games-won'>How many times did I win?</a>
   </body>
 </html>
 

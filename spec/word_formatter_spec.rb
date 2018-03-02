@@ -14,16 +14,16 @@ RSpec.describe WordFormatter do
   end
 
   it "reveals correctly guessed letters" do
-    rules.guess("h", [])
-    rules.guess("e", [])
+    rules.guess("h")
+    rules.guess("e")
 
     formatted_word = formatter.format("hello")
 
-    expect(formatted_word).to eq("h e _ _ _")
+    expect(formatted_word).to eq("H E _ _ _")
   end
 
   it "keeps hidden letters not correctly guessed" do
-    rules.guess("i", [])
+    rules.guess("i")
 
     formatted_word = formatter.format("hello")
 

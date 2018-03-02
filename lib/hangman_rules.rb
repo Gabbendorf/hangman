@@ -9,9 +9,8 @@ class HangmanRules
     @guesses = guesses
   end
 
-  def guess(guessed_letter, guessable_letters)
+  def guess(guessed_letter)
     remember_guess_result(guessed_letter) if valid_guess?(guessed_letter)
-    remove_from_possible_guesses(guessed_letter, guessable_letters)
   end
 
   private
@@ -37,18 +36,14 @@ class HangmanRules
   end
 
   def letter?(guessed_letter)
-    letters.include?(guessed_letter)
+    valid_letters.include?(guessed_letter)
   end
 
-  def letters
+  def valid_letters
     ("a".."z").to_a
   end
 
   def not_guessed_already?(guessed_letter)
       !guesses.values.flatten.include?(guessed_letter)
-  end
-
-  def remove_from_possible_guesses(letter_guessed, guessable_letters)
-    guessable_letters.delete(letter_guessed)
   end
 end

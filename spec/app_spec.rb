@@ -17,25 +17,13 @@ RSpec.describe App do
   it "displays welcome message on the homepage" do
     get '/'
 
-    expect(last_response.body).to include("WELCOME TO HANGMAN GAME")
+    expect(last_response.body).to include("Guess the word!")
   end
 
   it "displays lines in place of secret word on homepage" do
     get '/', {}, {'rack.session' => {'secret_word' => "hi"}}
 
     expect(last_response.body).to include("_ _")
-  end
-
-  it "asks to make guess on the homepage" do
-    get '/'
-
-    expect(last_response.body).to include("Make a guess")
-  end
-
-  it "displays list of letters on the homepage" do
-    get '/'
-
-    expect(last_response.body).to include("a b c d e f g h i j k l m n o p q r s t u v w x y z")
   end
 
   it "displays the heart image corresponding to start of game on homepage" do
@@ -46,13 +34,12 @@ RSpec.describe App do
     expect(last_response.body).to include(starting_image)
   end
 
-  it "deletes guessed letter from guessable letters in play route" do
-    get '/'
-    post '/play', 'letter_chosen' => 'a'
+  it "shows wrong guesses" do
+    play("hi", ["x", "o"])
 
     follow_redirect!
 
-    expect(last_response.body).to include("b c d e f g h i j k l m n o p q r s t u v w x y z")
+    expect(last_response.body).to include("<p>X O</p>")
   end
 
   it "displays updated hangman image if guess is wrong" do

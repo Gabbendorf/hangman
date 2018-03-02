@@ -16,7 +16,7 @@ class WordFormatter
 
   def hide_or_reveal(letter)
     if correctly_guessed?(letter)
-      letter
+      letter.capitalize
     else
       "_"
     end

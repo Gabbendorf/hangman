@@ -5,11 +5,11 @@
     <title>Hangman</title>
   </head>
   <body class='container'>
+    <a href=<%= @page_to_go_back_to %>>Back</a>
     <% if @won_games_count == "1" %>
       <p>You won <%= @won_games_count %> time</p>
     <% else %>
       <p>You won <%= @won_games_count %> times</p>
     <%end %>
-    <a href=<%= @page_to_go_back_to %>>Go back</a>
   </body>
 </html>
