@@ -3,19 +3,22 @@
   <head>
     <meta charset='UTF-8' />
     <title>Hangman</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body class='container'>
-    <a href='/games-won'>Win counter</a>
-    <h1> Guess the word! </h1>
-    <form action='/play' method='post'>
-      <label for='letter'></label>
-      <input type='text' id='letter' name='letter_chosen' autofocus="autofocus">
-      <button type='submit' class='btn btn-primary'>Guess!</button>
-    </form>
-    <p><%= @secret_word %></p>
-    <img src='<%= @image %>.jpg' alt='hangman image' height="500" width="500">
-    <p>Wrong guesses:</p>
-    <p><%= @wrong_guesses%></p>
+  <body>
+    <div class='container'>
+      <a href='/games-won'>Win counter</a>
+      <h1> Guess the word! </h1>
+      <form action='/play' method='post'>
+	<label for='letter'></label>
+	<input type='text' id='letter' name='letter_chosen' autofocus="autofocus">
+	<button type='submit' class='btn btn-primary'>Guess!</button>
+      </form>
+      <p><%= @secret_word %></p>
+      <img src='<%= @image %>.jpg' alt='hangman image' height="500" width="500">
+      <p>Wrong guesses:</p>
+      <p><%= @wrong_guesses%></p>
+    </div>
   </body>
 </html>
 

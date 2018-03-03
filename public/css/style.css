@@ -1,0 +1,11 @@
+.container {
+  margin: 0 auto;
+  border-width: 14px;
+  border-style: solid;
+  border-color: pink;
+  border-radius: 95px;
+  text-align: center;
+  width: 650px;
+  height: 800px;
+  background-color: lightblue;
+}

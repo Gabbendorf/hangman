@@ -3,13 +3,16 @@
   <head>
     <meta charset='UTF-8' />
     <title>Hangman</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body class='container'>
-    <a href=<%= @page_to_go_back_to %>>Back</a>
-    <% if @won_games_count == "1" %>
-      <p>You won <%= @won_games_count %> time</p>
-    <% else %>
-      <p>You won <%= @won_games_count %> times</p>
-    <%end %>
+  <body>
+    <div class='container'>
+      <a href=<%= @page_to_go_back_to %>>Back</a>
+      <% if @won_games_count == "1" %>
+	<p>You won <%= @won_games_count %> time</p>
+      <% else %>
+	<p>You won <%= @won_games_count %> times</p>
+      <%end %>
+    </div>
   </body>
 </html>
