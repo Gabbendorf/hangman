@@ -7,7 +7,9 @@
   </head>
   <body>
     <div class='container'>
-      <a href=<%= @page_to_go_back_to %>>Back</a>
+      <div class='link'>
+	<a href=<%= @page_to_go_back_to %>>Back</a>
+      </div>
       <% if @won_games_count == "1" %>
 	<p>You won <%= @won_games_count %> time</p>
       <% else %>
