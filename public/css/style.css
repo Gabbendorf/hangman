@@ -5,11 +5,12 @@
   border-color: pink;
   border-radius: 95px;
   text-align: center;
-  width: 650px;
-  height: 800px;
+  width: 600px;
+  height: 775px;
   background-color: lightblue;
   font-family: 'Comfortaa', cursive;
   font-size: 12px;
+  color: black;
 }
 
 .secret-word {
