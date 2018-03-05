@@ -1,6 +1,6 @@
 # The Hangman Game
 
-<img src='public/game_over.jpg' alt='hangman' width='450' align='middle'/>
+<img src='public/game_over.jpg' alt='hangman' width='300' height='300' align='middle'/>
 
 A Sinatra application 
 
@@ -10,4 +10,8 @@ A Sinatra application
 * type `bundle install`
 * type `ruby app.rb`
 * open your favourite web browser at `http://localhost:4567`
+* HAVE FUN!
+
+## Where to find the app online
+* Go [here](https://gabi-hangman.herokuapp.com/)
 * HAVE FUN!
