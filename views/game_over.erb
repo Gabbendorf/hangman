@@ -4,6 +4,7 @@
     <meta charset='UTF-8' />
     <title>Hangman</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata" rel="stylesheet">
   </head>
   <body>
     <div class='container'>
@@ -11,7 +12,7 @@
 	<a href='/games-won'>Win Counter</a>
       </div>
       <img src='<%= @image %>.jpg'>
-      <p><%= @secret_word_revealed %></p>
+      <p class='secret-word'><%= @secret_word_revealed %></p>
       <p><%= @verdict %></p>
       <form action='/play-again' method='post'>
 	<button type='re-play'>Play again</button>

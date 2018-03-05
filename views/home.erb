@@ -4,22 +4,25 @@
     <meta charset='UTF-8' />
     <title>Hangman</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata" rel="stylesheet">
   </head>
   <body>
     <div class='container'>
       <div class='link'>
 	<a href='/games-won'>Win counter</a>
       </div>
-      <h1> Guess the word! </h1>
+      <h1><b> Guess the word! </b></h1>
       <form action='/play' method='post'>
 	<label for='letter'></label>
 	<input type='text' id='letter' name='letter_chosen' autofocus="autofocus">
 	<button type='submit' class='btn btn-primary'>Guess!</button>
       </form>
-      <p><%= @secret_word %></p>
+      <p class='secret-word'><%= @secret_word %></p>
       <img src='<%= @image %>.jpg' alt='hangman image' height="500" width="500">
-      <p>Wrong guesses:</p>
-      <p><%= @wrong_guesses%></p>
+      <div class='wrong-guesses'>
+	<p>Wrong guesses:</p>
+	<p><%= @wrong_guesses%></p>
+      </div>
     </div>
   </body>
 </html>

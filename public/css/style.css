@@ -8,6 +8,15 @@
   width: 650px;
   height: 800px;
   background-color: lightblue;
+  font-family: 'Comfortaa', cursive;
+  font-size: 12px;
+}
+
+.secret-word {
+  font-family: 'Inconsolata', monospace;
+  font-size: 40px;
+  font-weight: bold;
+  padding-top: 15px;
 }
 
 .link {
@@ -31,6 +40,11 @@ a {
   color: black;
   border-bottom: 1px solid black;
   padding-bottom: 2px;
+}
+
+.wrong-guesses {
+  font-size: 18px;
+  padding-top: 20px;
 }
 
 img {
