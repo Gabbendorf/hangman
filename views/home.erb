@@ -15,7 +15,7 @@
       <form action='/play' method='post'>
 	<label for='letter'></label>
 	<input type='text' id='letter' name='letter_chosen' autofocus="autofocus">
-	<button type='submit' class='btn btn-primary'>Guess!</button>
+	<button class='button' type='submit'>Guess!</button>
       </form>
       <p class='secret-word'><%= @secret_word %></p>
       <img src='<%= @image %>.jpg' alt='hangman image' height="500" width="500">

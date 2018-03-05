@@ -51,3 +51,20 @@ img {
   height: 300px;
   width: 300px;
 }
+
+.button {
+  background-color: darkblue;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: 3px 3px 3px grey;
+}
+
+input {
+  width: 20px;
+  height: 35px;
+}
+
+form {
+  padding-top: 20px;
+}
