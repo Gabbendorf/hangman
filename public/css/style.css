@@ -32,3 +32,8 @@ a {
   border-bottom: 1px solid black;
   padding-bottom: 2px;
 }
+
+img {
+  height: 300px;
+  width: 300px;
+}
