@@ -7,8 +7,8 @@ RSpec.describe HangmanRules do
     guesses = new_guesses
     hangman_rules = new_hangman_rules("hello", guesses)
 
-    hangman_rules.guess("h", guessable_letters)
-    hangman_rules.guess("e", guessable_letters)
+    hangman_rules.guess("h")
+    hangman_rules.guess("e")
 
     expect(guesses[:right_guesses]).to eq(["h", "e"])
   end
@@ -17,7 +17,7 @@ RSpec.describe HangmanRules do
     guesses = new_guesses
     hangman_rules = new_hangman_rules("hello", guesses)
 
-    hangman_rules.guess("c", guessable_letters)
+    hangman_rules.guess("c")
 
     expect(guesses[:wrong_guesses]).to eq(["c"])
   end
@@ -26,7 +26,7 @@ RSpec.describe HangmanRules do
     guesses = new_guesses
     hangman_rules = new_hangman_rules("hi", guesses)
 
-    hangman_rules.guess("3", guessable_letters)
+    hangman_rules.guess("3")
 
     expect(guesses[:wrong_guesses]).not_to include("3")
   end
@@ -35,8 +35,8 @@ RSpec.describe HangmanRules do
     guesses = new_guesses
     hangman_rules = new_hangman_rules("hi", guesses)
 
-    hangman_rules.guess("e", guessable_letters)
-    hangman_rules.guess("e", guessable_letters)
+    hangman_rules.guess("e")
+    hangman_rules.guess("e")
 
     expect(guesses[:wrong_guesses]).not_to equal(["e", "e"])
     expect(guesses[:wrong_guesses]).to eq(["e"])
@@ -46,30 +46,17 @@ RSpec.describe HangmanRules do
     guesses = new_guesses
     hangman_rules = new_hangman_rules("hi", guesses)
 
-    hangman_rules.guess("i", guessable_letters)
-    hangman_rules.guess("i", guessable_letters)
+    hangman_rules.guess("i")
+    hangman_rules.guess("i")
 
     expect(guesses[:right_guesses]).not_to equal(["i", "i"])
     expect(guesses[:right_guesses]).to eq(["i"])
-  end
-
-  it "removes letter guessed from guessable letters" do
-    hangman_rules = new_hangman_rules("hello", new_guesses)
-    letters = guessable_letters
-
-    hangman_rules.guess("a", letters)
-
-    expect(letters).not_to include("a")
   end
 
   private
 
   def new_hangman_rules(word, guesses)
     HangmanRules.new(word, guesses)
-  end
-
-  def guessable_letters
-    ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
   end
 
   def new_guesses

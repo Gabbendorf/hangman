@@ -1,0 +1,82 @@
+.container {
+  margin: 0 auto;
+  border-width: 14px;
+  border-style: solid;
+  border-color: pink;
+  border-radius: 95px;
+  text-align: center;
+  width: 600px;
+  height: 775px;
+  background-color: lightblue;
+  font-family: 'Comfortaa', cursive;
+  color: black;
+}
+
+.secret-word {
+  font-family: 'Inconsolata', monospace;
+  font-size: 40px;
+  font-weight: 700;
+  padding-top: 15px;
+}
+
+.link {
+  border-radius: 12px;
+  background-color: pink;
+  padding-top: 25px;
+  width: 110px;
+  height: 10px;
+  margin: 5px auto 45px auto;
+  line-height: 10px;
+  padding: 15px;
+  position: relative;
+  top: 20px;
+}
+
+a {
+  font-size: 12px;
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px solid black;
+  padding-bottom: 2px;
+}
+
+a:hover {
+  color: white;
+  font-family: 'Open Sans';
+  font-size: 20px;
+  border-bottom: 1px solid white;
+}
+
+.wrong-guesses {
+  font-size: 18px;
+  padding-top: 20px;
+}
+
+img {
+  height: 300px;
+  width: 300px;
+}
+
+.button {
+  background-color: darkblue;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  box-shadow: 3px 3px 3px grey;
+}
+
+.button:hover {
+  box-shadow: 10px 10px 8px grey;
+  font-size: 30px;
+  cursor: pointer;
+  transition: font-size 1s ease;
+}
+
+input {
+  width: 20px;
+  height: 35px;
+}
+
+form {
+  padding-top: 20px;
+}
