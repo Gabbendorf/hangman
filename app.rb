@@ -66,7 +66,7 @@ class App < Sinatra::Base
 
   get "/" do
     @image = ImageLibrary.new.current_image(guesses[:wrong_guesses])
-    @secret_word = WordFormatter.new(rules).format(secret_word)
+    @secret_word = WordFormatter.new(rules, Game.new(rules)).format(secret_word)
     @wrong_guesses = format(guesses[:wrong_guesses])
     erb :home
   end
@@ -82,8 +82,8 @@ class App < Sinatra::Base
   end
 
   get "/end-of-game" do
-    @secret_word_revealed = secret_word.upcase
     rules = HangmanRules.new(secret_word, guesses)
+    @secret_word_revealed = WordFormatter.new(rules, Game.new(rules)).format(secret_word)
     if Game.new(rules).state == :won
       update_won_games_count
       display("You won!", ImageLibrary.new.image_for_winner)
