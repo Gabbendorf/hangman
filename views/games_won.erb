@@ -8,8 +8,17 @@
   </head>
   <body>
     <div class='container'>
-      <div class='link'>
-	<a href=<%= @page_to_go_back_to %>>Back</a>
+      <div class='link-nav'>
+	<nav>
+	  <div class='home'>
+	    <a href=<%= @page_to_go_back_to %>>Home</a>
+	    <div class='underline'></div>
+	  </div>
+	  <div class='win-counter'>
+	    <a href='/games-won'>Win counter</a>
+	    <div class='underline'></div>
+	  </div>
+	</nav>
       </div>
       <% if @won_games_count == "1" %>
 	<p>You won <%= @won_games_count %> time</p>

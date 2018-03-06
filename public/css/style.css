@@ -19,11 +19,11 @@
   padding-top: 15px;
 }
 
-.link {
+.link-nav {
   border-radius: 12px;
   background-color: pink;
   padding-top: 25px;
-  width: 110px;
+  width: 161px;
   height: 10px;
   margin: 5px auto 45px auto;
   line-height: 10px;
@@ -36,8 +36,23 @@ a {
   font-size: 12px;
   text-decoration: none;
   color: black;
+}
+
+.home, .win-counter {
+  position: absolute;
+}
+
+.home {
+  padding-left: 8%;
+}
+
+.win-counter {
+  padding-left: 36%;
+}
+
+.underline {
   border-bottom: 1px solid black;
-  padding-bottom: 2px;
+  padding-top: 5px;
 }
 
 a:hover {

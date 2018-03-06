@@ -8,8 +8,17 @@
   </head>
   <body>
     <div class='container'>
-      <div class='link'>
-	<a href='/games-won'>Win Counter</a>
+      <div class='link-nav'>
+	<nav>
+	  <div class='home'>
+	    <a href='/end-of-game'>Home</a>
+	    <div class='underline'></div>
+	  </div>
+	  <div class='win-counter'>
+	    <a href='/games-won'>Win counter</a>
+	    <div class='underline'></div>
+	  </div>
+	</nav>
       </div>
       <img src='<%= @image %>.jpg'>
       <p class='secret-word'><%= @secret_word_revealed %></p>
