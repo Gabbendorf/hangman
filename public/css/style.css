@@ -92,3 +92,51 @@ input {
 form {
   padding-top: 20px;
 }
+
+@media only screen and (max-width: 500px) {
+  .container {
+    border-style: none;
+    width: 300px;
+    height: 650px;
+    border-radius: 10%;
+  }
+
+  .secret-word {
+    font-size: 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  img {
+    height: 250px;
+    width: 250px;
+  }
+
+  .wrong-guesses {
+    font-size: 15px;
+  }
+
+  .link-nav {
+    width: 130px;
+    padding-top: 10px;
+  }
+
+  a {
+    font-size: 10px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: white;
+    font-family: 'Open Sans';
+    font-size: 16px;
+    border-bottom: 1px solid white;
+    margin-left: 0px;
+  }
+
+  .button:hover {
+    font-size: 25px;
+  }
+}
