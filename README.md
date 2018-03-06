@@ -4,7 +4,7 @@
 
 A Sinatra application 
 
-## How to run it
+## How to run the app from terminal
 * git clone `git@github.com:Gabbendorf/hangman.git`
 * navigate into main folder `hangman`
 * type `bundle install`
