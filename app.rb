@@ -60,7 +60,7 @@ class App < Sinatra::Base
     end
 
     def format(wrong_guesses)
-      wrong_guesses.map {|guess| guess.capitalize}.join(" ")
+      wrong_guesses.map {|guess| guess.capitalize}.sort.join(" ")
     end
   end
 

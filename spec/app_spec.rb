@@ -39,7 +39,7 @@ RSpec.describe App do
 
     follow_redirect!
 
-    expect(last_response.body).to include("<p>X O</p>")
+    expect(last_response.body).to include("<p>O X</p>")
   end
 
   it "displays updated hangman image if guess is wrong" do
