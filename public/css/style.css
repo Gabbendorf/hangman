@@ -97,7 +97,7 @@ form {
   .container {
     border-style: none;
     width: 320px;
-    height: 575px;
+    height: 555px;
     border-radius: 10%;
   }
 
@@ -116,6 +116,7 @@ form {
 
   .wrong-guesses {
     font-size: 15px;
+    padding-top: 3px;
   }
 
   .link-nav {
@@ -141,6 +142,6 @@ form {
   }
 
   input {
-  height: 30px;
-}
+    height: 30px;
+  }
 }
