@@ -8,18 +8,10 @@
   </head>
   <body>
     <div class='container'>
-      <div class='link-nav'>
-	<nav>
-	  <div class='home'>
-	    <a href='/'>Home</a>
-	    <div class='underline'></div>
-	  </div>
-	  <div class='win-counter'>
-	    <a href='/games-won'>Win counter</a>
-	    <div class='underline'></div>
-	  </div>
-	</nav>
-      </div>
+      <nav class='link-nav'>
+	<a href='/'>Home</a>
+	<a href='/games-won'>Win counter</a>
+      </nav>
       <h1>Guess the word!</h1>
       <form action='/play' method='post'>
 	<label for='letter'></label>
