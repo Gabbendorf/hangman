@@ -8,9 +8,10 @@
   </head>
   <body>
     <div class='container'>
-      <div class='link'>
-	<a href=<%= @page_to_go_back_to %>>Back</a>
-      </div>
+      <nav class='link-nav'>
+	<a href=<%= @page_to_go_back_to %>>Home</a>
+	<a href='/games-won'>Win counter</a>
+      </nav>
       <% if @won_games_count == "1" %>
 	<p>You won <%= @won_games_count %> time</p>
       <% else %>
