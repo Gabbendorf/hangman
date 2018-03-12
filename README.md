@@ -5,6 +5,8 @@
 A Sinatra application 
 
 ## How to run the app from terminal
+It is required to have Ruby and Bundler installed:
+
 * git clone `git@github.com:Gabbendorf/hangman.git`
 * navigate into main folder `hangman`
 * to install all dependencies run `bundle install`
